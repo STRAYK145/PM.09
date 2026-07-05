@@ -1,0 +1,55 @@
+<%- include('ost/header', { title: 'Вход' }) %>
+
+<div class="row justify-content-center">
+
+    <div class="col-md-5">
+
+        <div class="card shadow">
+
+            <div class="card-body">
+
+                <h2 class="text-center mb-4">
+                    Вход
+                </h2>
+
+                <form method="POST" action="/login">
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Логин
+                        </label>
+
+                        <input
+                            type="text"
+                            name="login"
+                            class="form-control"
+                            required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Пароль
+                        </label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            required>
+                    </div>
+
+                    <button class="btn btn-primary w-100">
+                        Войти
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<%- include('ost/footer') %>

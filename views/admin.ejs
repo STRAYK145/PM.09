@@ -1,0 +1,145 @@
+<%- include('ost/header', { title: 'Админ панель' }) %>
+
+    <div class="container py-5">
+
+        <h2 class="mb-4">
+            Панель администратора
+        </h2>
+
+        <div class="row mb-4">
+
+            <div class="col-md-4">
+
+                <div class="card text-center shadow-sm">
+
+                    <div class="card-body">
+
+                        <h5>Пользователей</h5>
+
+                        <h2 class="text-primary">
+                            <%= stats.users_count %>
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card text-center shadow-sm">
+
+                    <div class="card-body">
+
+                        <h5>Всего задач</h5>
+
+                        <h2 class="text-warning">
+                            <%= stats.tasks_count %>
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card text-center shadow-sm">
+
+                    <div class="card-body">
+
+                        <h5>Выполнено</h5>
+
+                        <h2 class="text-success">
+                            <%= stats.completed_count %>
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card shadow-sm">
+
+            <div class="card-header">
+
+                Пользователи
+
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-hover">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Логин</th>
+                            <th>Email</th>
+                            <th>Задач</th>
+                            <th></th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <% users.forEach(user=> { %>
+
+                            <tr>
+
+                                <td>
+                                    <%= user.id %>
+                                </td>
+
+                                <td>
+                                    <%= user.username %>
+                                </td>
+
+                                <td>
+                                    <%= user.email %>
+                                </td>
+
+                                <td>
+                                    <%= user.tasks_count %>
+                                </td>
+
+                                <td>
+
+                                    <form action="/admin/user/<%= user.id %>/delete" method="POST"
+                                        style="display:inline">
+
+                                        <button class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Удалить пользователя? Все его задачи и комментарии также будут удалены.')">
+
+                                            Удалить
+
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+                            <% }) %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <%- include('ost/footer') %>

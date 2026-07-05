@@ -1,0 +1,205 @@
+<%- include('ost/header', { title: 'Просмотр задачи' }) %>
+
+    <div class="container py-5">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h2 class="fw-bold">
+                Просмотр задачи
+            </h2>
+
+            <a href="/tasks" class="btn btn-secondary">
+                ← Назад к списку
+            </a>
+
+        </div>
+
+        <div class="card shadow-sm mb-4">
+
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <%= task.title %>
+                </h4>
+            </div>
+
+            <div class="card-body">
+
+                <div class="row mb-3">
+
+                    <div class="col-md-6">
+
+                        <strong>Статус:</strong><br>
+
+                        <% if(task.status==="Новая" ){ %>
+
+                            <span class="badge bg-secondary">
+                                <%= task.status %>
+                            </span>
+
+                            <% } %>
+
+                                <% if(task.status==="В работе" ){ %>
+
+                                    <span class="badge bg-warning text-dark">
+                                        <%= task.status %>
+                                    </span>
+
+                                    <% } %>
+
+                                        <% if(task.status==="Выполнена" ){ %>
+
+                                            <span class="badge bg-success">
+                                                <%= task.status %>
+                                            </span>
+
+                                            <% } %>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <strong>Приоритет:</strong><br>
+
+                        <% if(task.priority==="Высокий" ){ %>
+
+                            <span class="badge bg-danger">
+                                <%= task.priority %>
+                            </span>
+
+                            <% } %>
+
+                                <% if(task.priority==="Средний" ){ %>
+
+                                    <span class="badge bg-primary">
+                                        <%= task.priority %>
+                                    </span>
+
+                                    <% } %>
+
+                                        <% if(task.priority==="Низкий" ){ %>
+
+                                            <span class="badge bg-secondary">
+                                                <%= task.priority %>
+                                            </span>
+
+                                            <% } %>
+
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <strong>Описание</strong>
+
+                    <div class="border rounded p-3 mt-2 bg-light">
+
+                        <%= task.description %>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <strong>Дедлайн:</strong>
+
+                        <p>
+                            <%= task.deadline %>
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <strong>Дата создания:</strong>
+
+                        <p>
+                            <%= task.created_at %>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Комментарии -->
+
+        <div class="card shadow-sm">
+
+            <div class="card-header">
+                <h5 class="mb-0">
+                    Комментарии
+                </h5>
+            </div>
+
+            <div class="card-body">
+
+                <% if(comments.length===0){ %>
+
+                    <p class="text-muted">
+                        Комментариев пока нет.
+                    </p>
+
+                    <% } %>
+
+                        <% comments.forEach(comment=> { %>
+
+                            <div class="border rounded p-3 mb-3">
+
+                                <div class="d-flex justify-content-between">
+
+                                    <strong>
+                                        <%= comment.username %>
+                                    </strong>
+
+                                    <small class="text-muted">
+                                        <%= comment.created_at %>
+                                    </small>
+
+                                </div>
+
+                                <hr>
+
+                                <p class="mb-0">
+                                    <%= comment.text %>
+                                </p>
+
+                            </div>
+
+                            <% }) %>
+
+                                <hr>
+
+                                <form action="/tasks/<%= task.id %>/comment" method="POST">
+
+                                    <div class="mb-3">
+
+                                        <label class="form-label">
+                                            Новый комментарий
+                                        </label>
+
+                                        <textarea name="text" class="form-control" rows="4" required></textarea>
+
+                                    </div>
+
+                                    <button class="btn btn-primary">
+
+                                        Добавить комментарий
+
+                                    </button>
+
+                                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <%- include('ost/footer') %>

@@ -1,0 +1,57 @@
+<%- include('ost/header', { title: 'Вход' }) %>
+
+    <tbody>
+
+        <% tasks.forEach(task=> { %>
+
+            <tr>
+
+                <td>
+                    <%= task.title %>
+                </td>
+
+                <td>
+                    <span class="badge bg-danger">
+                        <%= task.priority %>
+                    </span>
+                </td>
+
+                <td>
+                    <span class="badge bg-warning text-dark">
+                        <%= task.status %>
+                    </span>
+                </td>
+
+                <td>
+                    <%= task.deadline %>
+                </td>
+
+                <td>
+
+                    <a href="/tasks/<%= task.id %>" class="btn btn-sm btn-outline-primary">
+                        👁
+                    </a>
+
+                    <a href="/tasks/edit/<%= task.id %>" class="btn btn-sm btn-outline-success">
+                        ✏
+                    </a>
+
+                    <form action="/tasks/delete/<%= task.id %>" method="POST" style="display:inline">
+
+                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Удалить задачу?')">
+
+                            🗑
+
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            <% }) %>
+
+    </tbody>
+
+    <%- include('ost/footer') %>

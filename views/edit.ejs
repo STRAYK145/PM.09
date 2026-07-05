@@ -1,0 +1,49 @@
+<%- include('ost/header', { title: 'Редактирование' }) %>
+    <div class="container py-5">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-warning">
+                <h3>Редактирование задачи</h3>
+            </div>
+
+            <div class="card-body">
+
+                <form action="/tasks/edit/<%= task.id %>" method="POST">
+
+                    <input type="text" name="title" class="form-control mb-3" value="<%= task.title %>" required>
+
+                    <textarea name="description" class="form-control mb-3" rows="5"><%= task.description %></textarea>
+
+                    <select name="status" class="form-select mb-3">
+
+                        <option <%=task.status==="Новая" ? "selected" : "" %>>Новая</option>
+                        <option <%=task.status==="В работе" ? "selected" : "" %>>В работе</option>
+                        <option <%=task.status==="Выполнена" ? "selected" : "" %>>Выполнена</option>
+
+                    </select>
+
+                    <select name="priority" class="form-select mb-3">
+
+                        <option <%=task.priority==="Низкий" ? "selected" : "" %>>Низкий</option>
+                        <option <%=task.priority==="Средний" ? "selected" : "" %>>Средний</option>
+                        <option <%=task.priority==="Высокий" ? "selected" : "" %>>Высокий</option>
+
+                    </select>
+
+                    <input type="date" name="deadline" class="form-control mb-3" value="<%= task.deadline %>">
+
+                    <button class="btn btn-success w-100">
+                        Сохранить изменения
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <%- include('ost/footer') %>

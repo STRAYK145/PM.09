@@ -1,0 +1,111 @@
+<%- include('ost/header', { title: 'Профиль' }) %>
+
+    <div class="container py-5">
+
+        <div class="row">
+
+            <!-- Информация о пользователе -->
+            <div class="col-md-4">
+
+                <div class="card shadow-sm">
+
+                    <div class="card-body text-center">
+
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                                style="width:80px;height:80px;margin:auto;font-size:30px;">
+
+                                <%= user.username.charAt(0).toUpperCase() %>
+
+                            </div>
+                        </div>
+
+                        <h4>
+                            <%= user.username %>
+                        </h4>
+                        <p class="text-muted">
+                            <%= user.email %>
+                        </p>
+
+                        <hr>
+
+                        <small class="text-muted">
+                            Дата регистрации:
+                        </small>
+
+                        <p>
+                            <%= new Date(user.created_at).toLocaleDateString() %>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Статистика -->
+            <div class="col-md-8">
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+
+                        <div class="card shadow-sm text-center p-3">
+
+                            <h5>Всего задач</h5>
+                            <h2 class="text-primary">
+                                <%= stats.total %>
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="card shadow-sm text-center p-3">
+
+                            <h5>Новые</h5>
+                            <h2 class="text-secondary">
+                                <%= stats.new_tasks %>
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="card shadow-sm text-center p-3">
+
+                            <h5>В работе</h5>
+                            <h2 class="text-warning">
+                                <%= stats.in_progress %>
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="card shadow-sm text-center p-3">
+
+                            <h5>Выполнено</h5>
+                            <h2 class="text-success">
+                                <%= stats.done %>
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <%- include('ost/footer') %>
