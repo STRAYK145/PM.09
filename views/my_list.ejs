@@ -1,57 +1,54 @@
 <%- include('ost/header', { title: 'Вход' }) %>
 
-    <tbody>
+<% if (tasks.length === 0) { %>
 
-        <% tasks.forEach(task=> { %>
+    <div class="alert alert-info text-center">
+        Задач нет
+    </div>
 
-            <tr>
+<% } else { %>
 
-                <td>
-                    <%= task.title %>
-                </td>
+    <% tasks.forEach(task=> { %>
 
-                <td>
-                    <span class="badge bg-danger">
-                        <%= task.priority %>
-                    </span>
-                </td>
+        <div class="card mb-3">
+            <div class="card-body">
 
-                <td>
-                    <span class="badge bg-warning text-dark">
-                        <%= task.status %>
-                    </span>
-                </td>
+                <div class="d-flex justify-content-between align-items-start">
 
-                <td>
-                    <%= task.deadline %>
-                </td>
+                    <h5 class="card-title mb-2"><%= task.title %></h5>
 
-                <td>
+                    <div>
+                        <a href="/tasks/<%= task.id %>" class="btn btn-sm btn-outline-primary">
+                            👁
+                        </a>
 
-                    <a href="/tasks/<%= task.id %>" class="btn btn-sm btn-outline-primary">
-                        👁
-                    </a>
+                        <a href="/tasks/edit/<%= task.id %>" class="btn btn-sm btn-outline-success">
+                            ✏
+                        </a>
 
-                    <a href="/tasks/edit/<%= task.id %>" class="btn btn-sm btn-outline-success">
-                        ✏
-                    </a>
+                        <form action="/tasks/delete/<%= task.id %>" method="POST" style="display:inline">
+                            <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Удалить задачу?')">
+                                🗑
+                            </button>
+                        </form>
+                    </div>
 
-                    <form action="/tasks/delete/<%= task.id %>" method="POST" style="display:inline">
+                </div>
 
-                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Удалить задачу?')">
+                <div class="mb-2">
+                    <span class="badge bg-danger"><%= task.priority %></span>
+                    <span class="badge bg-warning text-dark"><%= task.status %></span>
+                </div>
 
-                            🗑
+                <p class="card-text text-muted mb-0">
+                    Дедлайн: <%= task.deadline %>
+                </p>
 
-                        </button>
+            </div>
+        </div>
 
-                    </form>
+    <% }) %>
 
-                </td>
+<% } %>
 
-            </tr>
-
-            <% }) %>
-
-    </tbody>
-
-    <%- include('ost/footer') %>
+<%- include('ost/footer') %>
